@@ -6,17 +6,24 @@
 resource_name = "zombite.gd"
 script/source = "extends CharacterBody2D
 
+func _ready():
+	randomize()
+
 @onready var animation = $AnimatedSprite2D
 
 
 func xmove():
-	var move = randi_range(0,1)
-	if move == 0:
+	if randi_range(0,1) == 0:
 		animation.play(\"Idle\")
+		velocity.x = 0
+	elif randi_range(0,1) == 1:
+		animation.play(\"Walk\")
+		velocity.x = 300
+	move_and_slide()
 
 func _input(event):
-	if event.is_action_pressed(\"jump\"):
-		xmove()
+	xmove()
+	
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jg60"]
