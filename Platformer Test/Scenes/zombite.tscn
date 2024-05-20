@@ -6,10 +6,17 @@
 resource_name = "zombite.gd"
 script/source = "extends CharacterBody2D
 
-var move = randi_range(0,1)
+@onready var animation = $AnimatedSprite2D
 
 
-if move = 1
+func xmove():
+	var move = randi_range(0,1)
+	if move == 0:
+		animation.play(\"Idle\")
+
+func _input(event):
+	if event.is_action_pressed(\"jump\"):
+		xmove()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jg60"]
@@ -54,9 +61,8 @@ script = SubResource("GDScript_22r1f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6q6p5")
-animation = &"Walk"
-autoplay = "Idle"
-frame_progress = 0.663968
+animation = &"Idle"
+autoplay = "Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
