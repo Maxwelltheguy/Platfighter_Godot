@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1ma86mqn8usl"]
+
+[ext_resource type="Texture2D" uid="uid://df0yklb1lpctx" path="res://Assets/Zombite.png" id="1_tsfj1"]
+
+[sub_resource type="GDScript" id="GDScript_22r1f"]
+resource_name = "zombite.gd"
+script/source = "extends CharacterBody2D
+
+var move = randi_range(0,1)
+
+
+if move = 1
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jg60"]
+atlas = ExtResource("1_tsfj1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3m64"]
+atlas = ExtResource("1_tsfj1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fmrh"]
+atlas = ExtResource("1_tsfj1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6q6p5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jg60")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3m64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fmrh")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_at3hw"]
+radius = 7.0
+
+[node name="Zombite" type="CharacterBody2D"]
+script = SubResource("GDScript_22r1f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6q6p5")
+animation = &"Walk"
+autoplay = "Idle"
+frame_progress = 0.663968
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 8)
+shape = SubResource("CircleShape2D_at3hw")
