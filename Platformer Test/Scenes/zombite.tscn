@@ -10,20 +10,33 @@ func _ready():
 	randomize()
 
 @onready var animation = $AnimatedSprite2D
+const SPEED = 300
+var flipped = 0
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
 
 
-func xmove():
-	if randi_range(0,1) == 0:
+func _physics_process(delta):
+	
+	if not is_on_floor():
+		pass#velocity.y += gravity * delta
+	
+	if randi_range(0,2) == 0:
 		animation.play(\"Idle\")
-		velocity.x = 0
-	elif randi_range(0,1) == 1:
+		#velocity.x = 0 * delta
+	elif randi_range(0,2) == 1:
 		animation.play(\"Walk\")
-		velocity.x = 300
+		#velocity.x = SPEED
+		GlobalVariables.zombite_flipped = 0
+	else:
+		animation.play(\"Walk\")
+		#velocity.x = SPEED * -1
+		GlobalVariables.zombite_flipped = 1
+	
 	move_and_slide()
 
-func _input(event):
-	xmove()
-	
+
+
+
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jg60"]
@@ -69,7 +82,7 @@ script = SubResource("GDScript_22r1f")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6q6p5")
 animation = &"Idle"
-autoplay = "Walk"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
