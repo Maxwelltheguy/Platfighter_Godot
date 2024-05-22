@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c520qwf2tjxq6"]
+[gd_scene load_steps=10 format=3 uid="uid://c520qwf2tjxq6"]
 
 [ext_resource type="Texture2D" uid="uid://blg8sneqlik7t" path="res://Assets/Grass.png" id="1_7nuft"]
 [ext_resource type="Texture2D" uid="uid://31vlscfttisd" path="res://icon.svg" id="1_mu5yo"]
@@ -31,6 +31,9 @@ sources/2 = SubResource("TileSetAtlasSource_dif0q")
 sources/3 = SubResource("TileSetScenesCollectionSource_3uywj")
 sources/0 = SubResource("TileSetAtlasSource_wc6ry")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljjqc"]
+size = Vector2(25, 249)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -44,3 +47,15 @@ zoom = Vector2(3, 3)
 
 [node name="Zombite" parent="." instance=ExtResource("4_ifrhw")]
 position = Vector2(-110, -51)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-224.5, -90.5)
+shape = SubResource("RectangleShape2D_ljjqc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(224.5, -90.5)
+shape = SubResource("RectangleShape2D_ljjqc")

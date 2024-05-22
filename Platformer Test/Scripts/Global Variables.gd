@@ -1,4 +1,4 @@
 extends Node
 
 
-var zombite_flipped = 0
+var Current_Wave = 0

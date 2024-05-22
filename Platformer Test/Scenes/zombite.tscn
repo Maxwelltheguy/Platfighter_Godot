@@ -9,31 +9,41 @@ script/source = "extends CharacterBody2D
 func _ready():
 	randomize()
 
+@onready var timer = $Timer
 @onready var animation = $AnimatedSprite2D
 const SPEED = 300
 var flipped = 0
 var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+var time = 0
 
+func wait():
+	for time in range(0,1000):
+		time = time + 1
 
 func _physics_process(delta):
+	var random = randi_range(0,2)
 	
 	if not is_on_floor():
-		pass#velocity.y += gravity * delta
+		velocity.y += gravity * delta
 	
-	if randi_range(0,2) == 0:
+	if random == 0:
 		animation.play(\"Idle\")
-		#velocity.x = 0 * delta
-	elif randi_range(0,2) == 1:
+		velocity.x = 0 
+		
+	elif random == 1:
 		animation.play(\"Walk\")
-		#velocity.x = SPEED
-		GlobalVariables.zombite_flipped = 0
+		velocity.x = SPEED
+		animation.scale.x = 1
+		
 	else:
 		animation.play(\"Walk\")
-		#velocity.x = SPEED * -1
-		GlobalVariables.zombite_flipped = 1
+		velocity.x = SPEED * -1
+		animation.scale.x = -1
+		
 	
 	move_and_slide()
-
+	
+	
 
 
 
@@ -71,24 +81,21 @@ animations = [{
 "loop": true,
 "name": &"Walk",
 "speed": 3.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"WalkLeft",
-"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_at3hw"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2412"]
+size = Vector2(14, 12)
 
 [node name="Zombite" type="CharacterBody2D"]
 script = SubResource("GDScript_22r1f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6q6p5")
-animation = &"WalkLeft"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 8)
-shape = SubResource("CircleShape2D_at3hw")
+position = Vector2(2, 10)
+shape = SubResource("RectangleShape2D_b2412")
+
+[node name="Timer" type="Timer" parent="."]
