@@ -9,40 +9,52 @@ script/source = "extends CharacterBody2D
 func _ready():
 	randomize()
 
-@onready var timer = $Timer
 @onready var animation = $AnimatedSprite2D
-const SPEED = 300
+const SPEED = 25
 var flipped = 0
 var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
-var time = 0
+var steps = 0
+@onready var zombite = $Zombite
 
-func wait():
-	for time in range(0,1000):
-		time = time + 1
 
-func _physics_process(delta):
-	var random = randi_range(0,2)
+
+func idle():
+	animation.play(\"Idle\")
+	velocity.x = 0
+	await get_tree().create_timer(10.0).timeout
+
+func walk_left():
+	animation.play(\"Walk\")
+	velocity.x = SPEED
+	animation.scale.x = 1
+	await get_tree().create_timer(10.0).timeout
+
+func walk_right():
+	animation.play(\"Walk\")
+	velocity.x = SPEED * -1
+	animation.scale.x = -1
+	await get_tree().create_timer(10.0).timeout
+
+func _process(delta):
+	var random = randi_range(1,1)
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	
-	if random == 0:
 		animation.play(\"Idle\")
-		velocity.x = 0 
+	
+	elif random == 0:
+		idle()
 		
 	elif random == 1:
-		animation.play(\"Walk\")
-		velocity.x = SPEED
-		animation.scale.x = 1
-		
+		walk_left()
+
 	else:
 		animation.play(\"Walk\")
 		velocity.x = SPEED * -1
 		animation.scale.x = -1
-		
+	
 	
 	move_and_slide()
-	
 	
 
 
