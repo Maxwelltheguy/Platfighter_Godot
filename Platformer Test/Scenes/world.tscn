@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c520qwf2tjxq6"]
+[gd_scene load_steps=11 format=3 uid="uid://c520qwf2tjxq6"]
 
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_4p46l"]
 [ext_resource type="Texture2D" uid="uid://blg8sneqlik7t" path="res://Assets/Grass.png" id="1_7nuft"]
 [ext_resource type="Texture2D" uid="uid://31vlscfttisd" path="res://icon.svg" id="1_mu5yo"]
 [ext_resource type="PackedScene" uid="uid://bdlwx3bwem62p" path="res://Scenes/character_body_2d.tscn" id="2_ygb4a"]
@@ -36,6 +37,10 @@ size = Vector2(25, 249)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_uck63")
 format = 2
@@ -44,9 +49,6 @@ layer_0/tile_data = PackedInt32Array(65526, 0, 0, 131062, 2, 0, 131063, 2, 0, 65
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -84)
 zoom = Vector2(3, 3)
-
-[node name="Zombite" parent="." instance=ExtResource("4_ifrhw")]
-position = Vector2(-110, -51)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -59,3 +61,10 @@ shape = SubResource("RectangleShape2D_ljjqc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(224.5, -90.5)
 shape = SubResource("RectangleShape2D_ljjqc")
+
+[node name="Spawn left" type="Node2D" parent="."]
+position = Vector2(-196, -29)
+script = ExtResource("1_4p46l")
+scene = ExtResource("4_ifrhw")
+
+[connection signal="timeout" from="Timer" to="Spawn left" method="_on_timer_timeout"]
