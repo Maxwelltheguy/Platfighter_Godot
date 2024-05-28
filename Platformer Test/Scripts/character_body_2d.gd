@@ -5,6 +5,7 @@ const RUN_SPEED = 80
 const SPEED = 70.0
 const JUMP_VELOCITY = -400.0
 
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -26,8 +27,17 @@ func _physics_process(delta):
 	if direction:
 		if Input.is_action_pressed("run"):
 			velocity.x = direction * (SPEED + RUN_SPEED)
+			if Input.is_action_pressed("left"):
+				$AnimatedSprite2D.scale.x = -1
+			elif Input.is_action_pressed("right"):
+				$AnimatedSprite2D.scale.x = 1
+			
 		else:
 			velocity.x = direction * SPEED
+			if Input.is_action_pressed("left"):
+				$AnimatedSprite2D.scale.x = -1
+			elif Input.is_action_pressed("right"):
+				$AnimatedSprite2D.scale.x = 1
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)

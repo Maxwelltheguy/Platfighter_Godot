@@ -1,10 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdlwx3bwem62p"]
+[gd_scene load_steps=7 format=3 uid="uid://bdlwx3bwem62p"]
 
 [ext_resource type="Texture2D" uid="uid://31vlscfttisd" path="res://icon.svg" id="1_naw41"]
 [ext_resource type="Script" path="res://Scripts/character_body_2d.gd" id="1_oyn73"]
+[ext_resource type="Texture2D" uid="uid://mhcky1si4sp1" path="res://Assets/Player.png" id="2_hnwgr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wml4g"]
+atlas = ExtResource("2_hnwgr")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b5i5a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wml4g")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_naw41")
@@ -14,15 +27,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2p7ih"]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_di526"]
+size = Vector2(10, 21)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_oyn73")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b5i5a")
-autoplay = "default"
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2p7ih")
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_di526")
