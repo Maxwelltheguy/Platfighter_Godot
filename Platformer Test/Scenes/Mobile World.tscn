@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://csr4ggo3fs0ut"]
+
+[ext_resource type="PackedScene" uid="uid://c520qwf2tjxq6" path="res://Scenes/world.tscn" id="1_wt5hf"]
+
+[node name="Node2D" instance=ExtResource("1_wt5hf")]
+
+[node name="Control" type="Control" parent="." index="7"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -210.0
+offset_top = -212.0
+offset_right = 211.0
+offset_bottom = 3.0
+
+[node name="Button" type="Button" parent="Control" index="0"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 113.0
+offset_right = 58.0
+offset_bottom = 144.0
