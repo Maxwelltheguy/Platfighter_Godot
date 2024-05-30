@@ -58,3 +58,4 @@ texture = ExtResource("1_ypbfl")
 stretch_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
