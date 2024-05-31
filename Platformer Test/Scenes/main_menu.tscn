@@ -34,6 +34,7 @@ text = "Start Game (PC)"
 
 [node name="Start Game Mobile" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Start Game (Mobile)"
 
 [node name="Quit Button" type="Button" parent="VBoxContainer"]
@@ -58,4 +59,5 @@ texture = ExtResource("1_ypbfl")
 stretch_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Start Game Mobile" to="." method="_on_start_game_mobile_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
