@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c520qwf2tjxq6" path="res://Scenes/world.tscn" id="1_wt5hf"]
 [ext_resource type="Texture2D" uid="uid://tyyd3y7gv81c" path="res://Assets/Left.png" id="2_tmsf1"]
-[ext_resource type="Script" path="res://Scenes/Control.gd" id="2_wpnnq"]
+[ext_resource type="Script" path="res://Scripts/Control.gd" id="2_wpnnq"]
 
 [node name="Node2D" instance=ExtResource("1_wt5hf")]
 
